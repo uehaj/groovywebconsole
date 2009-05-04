@@ -9,10 +9,31 @@
         
         <link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.7.1.custom.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
+<script lang="javascript">
+function getScriptFromQuery(){
+    var q = new Array();
+	if(location.search){
+		var query = location.search;
+        query = query.substring(1, query.length);
+		var querys = new Array();
+		querys = query.split("&");
+		for (i=0;i<querys.length;i++){
+			var pram = new Array();
+			pram = querys[i].split("=");
+			var name = pram[0];
+			var value = pram[1];
+			q[name] = value;
+		}
+		return q['script']
+	}
+}
+function makeGadgetTag(str) {
+	return '<'+'script src="http://www.gmodules.com/ig/ifr?url=http://groovycode.appspot.com/gadget.groovy?script='+str+'&amp;synd=open&amp;w=480&amp;h=200&amp;title=&amp;border=%23ffffff%7C0px%2C0px+solid+%23999999&amp;output=js"></'+'script>';
+}
+</script>
     </head>
     <body>
         <script src="js/main.js" type="text/javascript"></script>      
-
         <div id="loadingDiv">
             <img src="images/ajax-spinner-blue.gif">
         </div>        
@@ -24,7 +45,9 @@
         
         <div id="button-bar">
             <input id="executeButton" type="button" value="Execute">
-        </div>        
+			<input value="generate gadget tag" type="button"  onclick="document.getElementById('tag').value=makeGadgetTag(encodeURI(editor.getCode()))">
+			<input id="tag" type="text">
+        </div>
         
         <div id="tabs">
             <ul>
@@ -46,7 +69,14 @@
             </div>
         </div>
         
-        <script language="javascript">            
+        <script language="javascript">
+		    var str = getScriptFromQuery();
+			if (str == undefined) {
+				str = 'println "hello world"';
+			}
+			str = str.replace(/\+/g, ' ');
+        	document.getElementById('script').value=decodeURI(str);
+        	document.getElementById('script').value=decodeURI(str);
         	var editor = CodeMirror.fromTextArea('script', {
                 height: "300px",
                 parserfile: ["tokenizejavascript.js", "parsejavascript.js"],

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<ModulePrefs title="Groovy Script"
+ author="uehaj" author_email="uehaj@jggug.com" height="300" width="640"
+ scrolling="true"
+ />
+<UserPref name="script" default_value="3*4" />
+<Content type="html">
+<![CDATA[
+  <link type="text/css" rel="stylesheet" href="http://groovycode.appspot.com/lib/styles/shCore.css" />
+  <link type="text/css" rel="stylesheet" href="http://groovycode.appspot.com/lib/styles/shThemeDefault.css" />
+  <script type="text/javascript" src="http://groovycode.appspot.com/lib/scripts/shCore.js"></script>
+  <script type="text/javascript" src="http://groovycode.appspot.com/lib/scripts/shBrushGroovy.js"></script>
+  <script type="text/javascript" src="http://groovycode.appspot.com/lib/scripts/shBrushPlain.js"></script>
+  <script type="text/javascript">
+	  SyntaxHighlighter.config.clipboardSwf = 'http://groovycode.appspot.com/lib/scripts/clipboard.swf';
+	  SyntaxHighlighter.all();
+  </script>
+<style type="text/css">//.result {
+//position: fixed!important;
+//position: absolute;
+//left   : 8px;
+//right  : 8px;
+//bottom : 0;
+//}
+.result { background-color: #eeeeff; }
+</style>
+<div onClick="window.open('http://groovycode.appspot.com?script=<%=java.net.URLEncoder.encode(script,"utf-8")%>')">
+<div class="code">
+<pre class="brush: groovy; toolbar: false;">
+<%= java.net.URLDecoder.decode(script, "utf-8") %>
+</pre>
+</div>
+<div class="result">
+<% if (!exceptionOccured) { %>
+<b>Result:</b> <%= result %><br/>
+<% } else {%>
+<b>Trace:</b> <%= trace %><br/>
+<% } %>
+<% if (output != '') { %>
+<b>Output:</b> <%= output %><br/>
+<% } %>
+</div>
+</div>
+
+]]>
+</Content>
+</Module>
