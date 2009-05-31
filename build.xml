@@ -38,7 +38,7 @@
 
 
   <!-- Change if you like e.g. "war" better than "www" for the output -->
-  <property name="war.dir" location="www"/>
+  <property name="war.dir" location="war"/>
 
   <target name="war" depends="enhance" 
           description="Assemble the application directory">

@@ -30,6 +30,9 @@ function getScriptFromQuery(){
 function makeGadgetTag(str) {
 	return '<'+'script src="http://www.gmodules.com/ig/ifr?url=http://groovycode.appspot.com/gadget.groovy?script='+str+'&amp;synd=open&amp;w=480&amp;h=200&amp;title=&amp;border=%23ffffff%7C0px%2C0px+solid+%23999999&amp;output=js"></'+'script>';
 }
+function makeIFrameTag(str) {
+	return '<'+'iframe src="http://groovycode.appspot.com/html.groovy?script='+str+'"></'+'iframe>';
+}
 </script>
     </head>
     <body>
@@ -45,7 +48,8 @@ function makeGadgetTag(str) {
         
         <div id="button-bar">
             <input id="executeButton" type="button" value="Execute">
-			<input value="generate gadget tag" type="button"  onclick="document.getElementById('tag').value=makeGadgetTag(encodeURI(editor.getCode()))">
+			<input value="generate gadget tag" type="button"  onclick="document.getElementById('tag').value=makeGadgetTag(encodeURIComponent(editor.getCode()))">
+			<input value="generate iframe tag" type="button"  onclick="document.getElementById('tag').value=makeIFrameTag(encodeURIComponent(editor.getCode()))">
 			<input id="tag" type="text">
         </div>
         
